@@ -1,0 +1,286 @@
+/* Reset browser defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #000;
+    overflow: hidden;
+    /* No scrollbars */
+    cursor: none;
+    /* Hide cursor in game */
+}
+
+/* Game Canvas (3D World) */
+#gameCanvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background: #87CEEB;
+    /* Sky blue fallback */
+}
+
+/* Game UI Container */
+#gameUI {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Don't block mouse clicks */
+    z-index: 1000;
+    /* Always on top */
+}
+
+/* Top Left: Game Stats */
+#gameStats {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: 18px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    pointer-events: auto;
+}
+
+.stat-item {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    border-left: 3px solid #00ff00;
+}
+
+.stat-label {
+    font-weight: bold;
+    color: #cccccc;
+}
+
+.stat-value {
+    color: #ffffff;
+    margin-left: 10px;
+}
+
+/* Center: Crosshair */
+#crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    z-index: 1001;
+}
+
+/* Crosshair Style */
+.crosshair-classic {
+    color: #00ff00;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.crosshair-lines::before,
+.crosshair-lines::after {
+    content: '';
+    position: absolute;
+    background: #00ff00;
+    box-shadow: 0 0 5px #00ff00;
+}
+
+.crosshair-lines::before {
+    width: 2px;
+    height: 20px;
+    left: 50%;
+    top: 5px;
+    transform: translateX(-50%);
+}
+
+.crosshair-lines::after {
+    width: 20px;
+    height: 2px;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+}
+
+/* Top Right: Player List */
+#playerList {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 14px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    max-width: 200px;
+}
+
+.player-item {
+    margin-bottom: 5px;
+    padding: 3px 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+}
+
+/* Bottom Center: Chat */
+#chatContainer {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    pointer-events: auto;
+}
+
+#chatMessages {
+    height: 100px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+    display: none;
+    /* Hidden by default */
+}
+
+.chat-message {
+    color: white;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.chat-player {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+#chatInput {
+    width: 100%;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #555;
+    color: white;
+    border-radius: 3px;
+    display: none;
+    /* Hidden by default */
+}
+
+/* Loading Screen */
+#loadingScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1a1a1a, #333);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.loading-spinner {
+    border: 4px solid #333;
+    border-top: 4px solid #00ff00;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.loading-progress {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* Instructions Overlay */
+#instructions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1500;
+    max-width: 400px;
+}
+
+.instruction-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #00ff00;
+}
+
+.instruction-item {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.key-binding {
+    background: #333;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: monospace;
+    margin: 0 5px;
+}
+
+#startButton {
+    background: #00ff00;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    pointer-events: auto;
+}
+
+#startButton:hover {
+    background: #00cc00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+    #gameStats,
+    #playerList {
+        font-size: 14px;
+    }
+
+    #chatContainer {
+        width: 90%;
+    }
+
+    #instructions {
+        width: 90%;
+        padding: 20px;
+    }
+}

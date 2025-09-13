@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer FPS Game</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading FPS Game...</div>
+        <div class="loading-progress">Initializing 3D Engine</div>
+    </div>
+
+    <!-- Game Instructions -->
+    <div id="instructions">
+        <div class="instruction-title">FPS Game Controls</div>
+        <div class="instruction-item">
+            <span class="key-binding">W,A,S,D</span> - Move
+        </div>
+        <div class="instruction-item">
+            <span class="key-binding">Mouse</span> - Look Around
+        </div>
+        <div class="instruction-item">
+            <span class="key-binding">Left Click</span> - Shoot
+        </div>
+        <div class="instruction-item">
+            <span class="key-binding">R</span> - Reload
+        </div>
+        <div class="instruction-item">
+            <span class="key-binding">ENTER</span> - Chat
+        </div>
+        <div class="instruction-item">
+            <span class="key-binding">ESC</span> - Menu
+        </div>
+        <button id="startButton">Click to Start Game</button>
+    </div>
+
+    <!-- 3D Game Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Game UI Overlay -->
+    <div id="gameUI">
+        <!-- Game Statistics (Top Left) -->
+        <div id="gameStats">
+            <div class="stat-item">
+                <span class="stat-label">Health:</span>
+                <span class="stat-value" id="healthValue">100</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Ammo:</span>
+                <span class="stat-value" id="ammoValue">30</span>
+                <span class="stat-value">/</span>
+                <span class="stat-value" id="maxAmmoValue">30</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Score:</span>
+                <span class="stat-value" id="scoreValue">0</span>
+            </div>
+        </div>
+
+        <!-- Crosshair (Center) -->
+        <div id="crosshair">
+            <div class="crosshair-lines"></div>
+        </div>
+
+        <!-- Player List (Top Right) -->
+        <div id="playerList">
+            <div style="font-weight: bold; margin-bottom: 10px; color: #00ff00;">
+                Players Online: <span id="playerCount">1</span>
+            </div>
+            <div id="playerListItems">
+                <!-- Players will be added here dynamically -->
+            </div>
+        </div>
+
+        <!-- Chat System (Bottom Center) -->
+        <div id="chatContainer">
+            <div id="chatMessages"></div>
+            <input type="text" id="chatInput" placeholder="Type message and press Enter..." maxlength="100">
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <!-- Three.js - 3D Graphics Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Socket.io - Real-time Communication -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.4/socket.io.js"></script>
+
+    <!-- Your Game Code (Load order matters!) -->
+    <script src="js/constants.js"></script>
+    <script src="js/utils.js"></script> <!-- Helper functions first -->
+    <script src="js/controls.js"></script> <!-- Input handling -->
+    <script src="js/player.js"></script> <!-- Player logic -->
+    <script src="js/weapons.js"></script> <!-- Weapon system -->
+    <script src="js/bullets.js"></script> <!-- Bullet physics -->
+    <script src="js/world.js"></script> <!-- Game world -->
+    <script src="js/scene.js"></script> <!-- 3D scene setup -->
+    <script src="js/networking.js"></script> <!-- Multiplayer -->
+    <script src="js/ui.js"></script> <!-- Interface updates -->
+    <script src="js/main.js"></script> <!-- Main game coordinator -->
+
+    <!-- Initialize Game -->
+    <script>
+        // Hide loading screen once everything loads
+        window.addEventListener('load', () => {
+            document.getElementById('loadingScreen').style.display = 'none';
+        });
+
+        // Start button handler
+        document.getElementById('startButton').addEventListener('click', () => {
+            document.getElementById('instructions').style.display = 'none';
+            // Game will initialize from main.js
+        });
+
+        // Prevent right-click menu in game
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+    </script>
+</body>
+
+</html>
